@@ -36,7 +36,7 @@ class Persona{
         cout<<"Cual es tu sexo 1)femenino\n 2)masculino: \n";
         cin>>persona1.sexo;
 
-    }
+    };
 
     void mostrarPersonal(){
         cout<<"Tus datos son:\n";
@@ -51,14 +51,14 @@ class Persona{
 
     };
     void calcularmc(){
-        double pesoActual = peso/estatura^2;
+        double pesoActual = (peso/estatura)^2;
         if (pesoActual<20){
             cout<<"El peso esta por debajo de lo ideal:(";
         }else if(pesoActual>=20 && pesoActual<=25){
             cout<<"El peso es el ideal :)";
         }else if(pesoActual>25){
             cout<<"Tienes sobrepeso:(";
-        }
+        };
 
     }
     void mayorEdad(){
