@@ -70,8 +70,8 @@ class Persona{
     }
 };
 int main(){
-    Persona person1;
-    person1.pedirDatos();
-    person1.mostrarPersonal();
-    person1.calcularmc();
+    Persona persona1;
+    persona1.pedirDatos();
+    persona1.mostrarPersonal();
+    persona1.calcularmc();
 }
