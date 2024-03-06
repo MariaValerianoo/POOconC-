@@ -12,31 +12,32 @@ class Persona{
     double estatura;
     int edad;
     int sexo;
-    int peso;
+    double peso;
     Persona(){
         
     };
-    Persona person1;
+    Persona persona1;
     public:
     void pedirDatos(){
         cout<<"Ingresa tu tipo de documento\n 1)Cedula \n 2)Tarjeta de identidad \n 3)cedula extranjeria";
-        cin>>person1.tipoDoc;
+        cin>>persona1.tipoDoc;
         cout<<"Cual es tu documento: \n";
-        cin>>person1.documento;
+        cin>>persona1.documento;
         cout<<"Cual es tu nombre: \n";
-        cin>>person1.nombre;
+        cin>>persona1.nombre;
         cout<<"Cual es tu apellido: \n";
-        cin>>person1.apellido;
+        cin>>persona1.apellido;
         cout<<"Cual es tu estatura: \n";
-        cin>>person1.estatura;
+        cin>>persona1.estatura;
         cout<<"Cual es tu peso: \n";
-        cin>>person1.peso;
+        cin>>persona1.peso;
         cout<<"Cual es tu edad: \n";
-        cin>>person1.edad;
+        cin>>persona1.edad;
         cout<<"Cual es tu sexo 1)femenino\n 2)masculino: \n";
-        cin>>person1.sexo;
+        cin>>persona1.sexo;
 
     }
+
     void mostrarPersonal(){
         cout<<"Tus datos son:\n";
         cout<<"Tu tipo de documento es: "<<tipoDoc;
@@ -48,9 +49,9 @@ class Persona{
         cout<<"Tu edad es: "<<edad;
         cout<<"Tu sexo es: "<<sexo;
 
-    }
+    };
     void calcularmc(){
-        int pesoActual= peso/estatura^2;
+        double pesoActual = peso/estatura^2;
         if (pesoActual<20){
             cout<<"El peso esta por debajo de lo ideal:(";
         }else if(pesoActual>=20 && pesoActual<=25){
