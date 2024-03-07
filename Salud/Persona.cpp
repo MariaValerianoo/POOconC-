@@ -5,7 +5,7 @@ using namespace std;
 class Persona{
 
     public:
-    string tipoDoc;
+    int tipoDoc;
     int documento;
     string nombre;
     string apellido;
@@ -16,55 +16,66 @@ class Persona{
     Persona(){
         
     };
-    Persona persona1;
+    
+
     public:
     void pedirDatos(){
-        cout<<"Ingresa tu tipo de documento\n 1)Cedula \n 2)Tarjeta de identidad \n 3)cedula extranjeria";
-        cin>>persona1.tipoDoc;
+        cout<<"Ingresa tu tipo de documento\n 1)Cedula \n 2)Tarjeta de identidad \n 3)cedula extranjeria"<<endl;
+        cin>>tipoDoc;
         cout<<"Cual es tu documento: \n";
-        cin>>persona1.documento;
+        cin>>documento;
         cout<<"Cual es tu nombre: \n";
-        cin>>persona1.nombre;
+        cin>>nombre;
         cout<<"Cual es tu apellido: \n";
-        cin>>persona1.apellido;
+        cin>>apellido;
         cout<<"Cual es tu estatura: \n";
-        cin>>persona1.estatura;
+        cin>>estatura;
         cout<<"Cual es tu peso: \n";
-        cin>>persona1.peso;
+        cin>>peso;
         cout<<"Cual es tu edad: \n";
-        cin>>persona1.edad;
-        cout<<"Cual es tu sexo 1)femenino\n 2)masculino: \n";
-        cin>>persona1.sexo;
+        cin>>edad;
+        cout<<"Cual es tu sexo \n1)femenino\n 2)masculino: \n";
+        cin>>sexo;
 
     };
 
     void mostrarPersonal(){
         cout<<"Tus datos son:\n";
-        cout<<"Tu tipo de documento es: "<<tipoDoc;
-        cout<<"Tu documento es: "<<documento;
-        cout<<"Tu nombre es: "<<nombre;
-        cout<<"Tu apellido es: "<<apellido;
-        cout<<"Tu estatura es: "<<estatura;
-        cout<<"Tu peso es: "<<peso;
-        cout<<"Tu edad es: "<<edad;
-        cout<<"Tu sexo es: "<<sexo;
+        if(tipoDoc==1){
+            cout<<"Tu tipo de documento es: cedula\n";
+        }else if(tipoDoc==2){
+            cout<<"Tu tipo de documento es: Tarjeta de identidad \n";
+        }else if(tipoDoc==3){
+            cout<<"Tu tipo de documento es: Cedula de extranjeria \n";
+        }
+        cout<<"Tu documento es: "<<documento<<endl;
+        cout<<"Tu nombre es: "<<nombre<<endl;
+        cout<<"Tu apellido es: "<<apellido<<endl;
+        cout<<"Tu estatura es: "<<estatura<<endl;
+        cout<<"Tu peso es: "<<peso<<endl;
+        cout<<"Tu edad es: "<<edad<<endl;
+        if(sexo==1){
+            cout<<"Tu sexo es: Femenino"<<endl;
+        }else if(sexo==2){
+            cout<<"Tu sexo es: Masculino "<<endl;
+        }
 
     };
     void calcularmc(){
-        double pesoActual = (peso/estatura)^2;
-        if (pesoActual<20){
-            cout<<"El peso esta por debajo de lo ideal:(";
-        }else if(pesoActual>=20 && pesoActual<=25){
-            cout<<"El peso es el ideal :)";
-        }else if(pesoActual>25){
-            cout<<"Tienes sobrepeso:(";
+        double pesoActual = (peso/estatura)*(peso/estatura);
+        if (pesoActual<20.5){
+            cout<<"El peso esta por debajo de lo ideal:("<<endl;
+        }else if(pesoActual>=20.0 && pesoActual<=25.0){
+            cout<<"El peso es el ideal :)"<<endl;
+        }else if(pesoActual>25.0){
+            cout<<"Tienes sobrepeso:("<<endl;
         };
 
     }
     void mayorEdad(){
-        if (edad>18){
+        if (edad>=18){
             cout<<"Eres mayor de edad:)";
-        }else if(edad<18){
+        }else{
             cout<<"Eres menos de edad:(";
         }
     }
@@ -74,4 +85,5 @@ int main(){
     persona1.pedirDatos();
     persona1.mostrarPersonal();
     persona1.calcularmc();
+    persona1.mayorEdad();
 }
