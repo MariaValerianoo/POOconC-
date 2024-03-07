@@ -73,10 +73,14 @@ class Persona{
 
     }
     void mayorEdad(){
+
         if (edad>=18){
             cout<<"Eres mayor de edad:)";
         }else{
-            cout<<"Eres menos de edad:(";
+            cout<<"Eres menos de edad:("<<endl;
+            if(tipoDoc==1){
+                cout<<"Tu documento seria Tarjeta de identidad "<<endl;
+            }
         }
     }
 };

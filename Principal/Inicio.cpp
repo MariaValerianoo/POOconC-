@@ -4,4 +4,4 @@ using namespace std;
 class Inicio{
     Persona user;
 };
-//tarea herencia, encapculamiento,interfaces,clases abstractas, sobre carga;
+//tarea herencia, encapsulamiento,interfaces,clases abstractas, sobre carga;
