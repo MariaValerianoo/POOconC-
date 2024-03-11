@@ -151,17 +151,11 @@ class Persona{
         }
 
     };
-    void calcularmc(){
+    double calcularmc(){
         double pesoActual = (peso/estatura)*(peso/estatura);
-        if (pesoActual<20.5){
-            cout<<"El peso esta por debajo de lo ideal:("<<endl;
-        }else if(pesoActual>=20.0 && pesoActual<=25.0){
-            cout<<"El peso es el ideal :)"<<endl;
-        }else if(pesoActual>25.0){
-            cout<<"Tienes sobrepeso:("<<endl;
-        };
+        return pesoActual;
 
-    }
+    };
     void mayorEdad(){
 
         if (edad>=18){
