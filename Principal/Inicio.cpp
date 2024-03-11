@@ -1,25 +1,31 @@
 #include <iostream>
 #include "../Salud/Persona.cpp"
+#include "../Salud/Empleado.cpp"
 
 using namespace std;
 
 class Inicio {
-public:
-        Persona user1;
-        double imc = user1.calcularmc(); 
+    Persona user;
+    Empleado usuario;
 
-        if (imc < 20.5) {
-            cout << "El peso está por debajo de lo ideal :(" << endl;
-        } else if (imc >= 20.0 && imc <= 25.0) {
-            cout << "El peso es el ideal :)" << endl;
-        } else if (imc > 25.0) {
-            cout << "Tienes sobrepeso :(" << endl;
-        }
 }
 
-/*int main(){
-    Inicio inicio;
-    inicio.ejecutar();
+int main(){
+    Persona user;
+    Empleado usuario;
+    user.pedirDatos();
+    usuario.pedirDatos();
+    int pesoActual=user.calcularmc();
+    if (pesoActual<20.5){
+            cout<<"El peso esta por debajo de lo ideal:("<<endl;
+        }else if(pesoActual>=20.0 && pesoActual<=25.0){
+            cout<<"El peso es el ideal :)"<<endl;
+        }else if(pesoActual>25.0){
+            cout<<"Tienes sobrepeso:("<<endl;
+        };
+    usuario.mostrarDatos();
+    usuario.mayorEdad(int fechaNacimiento, int año);
+
     return 0;
 }
 
