@@ -5,7 +5,6 @@ using namespace std;
 
 class Inicio {
 public:
-    void ejecutar() {
         Persona user1;
         double imc = user1.calcularmc(); 
 
@@ -16,10 +15,9 @@ public:
         } else if (imc > 25.0) {
             cout << "Tienes sobrepeso :(" << endl;
         }
-    }
-};
+}
 
-int main(){
+/*int main(){
     Inicio inicio;
     inicio.ejecutar();
     return 0;

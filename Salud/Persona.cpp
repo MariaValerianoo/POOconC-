@@ -168,6 +168,7 @@ class Persona{
         }
     }
 };
+
 int main(){
     Persona persona1;
     persona1.pedirDatos();
