@@ -169,10 +169,10 @@ class Persona{
     }
 };
 
-int main(){
+/*int main(){
     Persona persona1;
     persona1.pedirDatos();
     persona1.mostrarPersonal();
     persona1.calcularmc();
     persona1.mayorEdad();
-}
+}*/

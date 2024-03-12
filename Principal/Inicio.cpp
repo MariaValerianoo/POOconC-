@@ -6,15 +6,16 @@ using namespace std;
 
 class Inicio {
     Persona user;
-    Empleado usuario;
+    Empleado empleado;
 
-}
+};
 
 int main(){
     Persona user;
-    Empleado usuario;
+    Empleado empleado;
+
     user.pedirDatos();
-    usuario.pedirDatos();
+    empleado.pedirDatos();
     int pesoActual=user.calcularmc();
     if (pesoActual<20.5){
             cout<<"El peso esta por debajo de lo ideal:("<<endl;
@@ -23,9 +24,11 @@ int main(){
         }else if(pesoActual>25.0){
             cout<<"Tienes sobrepeso:("<<endl;
         };
-    usuario.mostrarDatos();
-    usuario.mayorEdad(int fechaNacimiento, int año);
-
+    empleado.getfechaNacimiento();
+    empleado.getaño();
+    empleado.mostrarDatos();
+    int fechaNacimiento,año;
+    empleado.mayorEdad(fechaNacimiento, año);
     return 0;
 }
 

@@ -10,7 +10,6 @@ class Empleado:public Persona{
     int fechaNacimiento;
     int año;
     double honorarios;
-    double honorarios2;
     void setDepartamento(string _departamento){
 
         departamento = _departamento;
@@ -55,24 +54,24 @@ class Empleado:public Persona{
         return horasTrabajadas;
 
     }
-    void setFechaNacimiento(int _fechaNacimiento){
+    void setfechaNacimiento(int _fechaNacimiento){
 
         fechaNacimiento = _fechaNacimiento;
 
     }
 
-    int getFechaNacimiento(){
+    int getfechaNacimiento(){
 
         return fechaNacimiento;
 
     }
-    void setAño(int _año){
+    void setaño(int _año){
 
         año = _año;
 
     }
 
-    int getAño(){
+    int getaño(){
 
         return año;
 
@@ -120,7 +119,8 @@ class Empleado:public Persona{
         }else{
             cout<<"Eres menos de edad:("<<endl;
         }
-    }
+        
+    };
     void mostrarDatos(){
         Persona mostrarPersonal();
         cout<<"Tu cargo es: "<<cargo<<endl;
