@@ -1,7 +1,7 @@
-#include"Persona.cpp"
+#include"persona1.cpp"
 //lo incluye en la estructura, importar trae todo el paquete no more.
 
-class Empleado:public Persona{
+class Empleado:public Persona1{
     private:
     string departamento;
     string cargo;
@@ -119,10 +119,10 @@ class Empleado:public Persona{
         }else{
             cout<<"Eres menos de edad:("<<endl;
         }
-        
+        return edad;
     };
     void mostrarDatos(){
-        Persona mostrarPersonal();
+        Persona1 mostrarPersonal();
         cout<<"Tu cargo es: "<<cargo<<endl;
         cout<<"Tus horas trabajadas son: "<<horasTrabajadas<<endl;
         cout<<"Tus honorarios son: "<<honorarios<<endl;

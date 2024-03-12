@@ -1,17 +1,17 @@
 #include <iostream>
-#include "../Salud/Persona.cpp"
+#include "../Salud/persona1.cpp"
 #include "../Salud/Empleado.cpp"
 
 using namespace std;
 
 class Inicio {
-    Persona user;
+    Persona1 user;
     Empleado empleado;
 
 };
 
 int main(){
-    Persona user;
+    Persona1 user;
     Empleado empleado;
 
     user.pedirDatos();
@@ -24,11 +24,11 @@ int main(){
         }else if(pesoActual>25.0){
             cout<<"Tienes sobrepeso:("<<endl;
         };
-    empleado.getfechaNacimiento();
-    empleado.getaño();
+    /*empleado:: getfechaNacimiento();
+    empleado:: getaño();*/
     empleado.mostrarDatos();
-    int fechaNacimiento,año;
-    empleado.mayorEdad(fechaNacimiento, año);
+    /*int fechaNacimiento,año;
+    empleado.mayorEdad(fechaNacimiento, año);*/
     return 0;
 }
 
