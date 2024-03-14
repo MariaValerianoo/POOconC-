@@ -30,7 +30,8 @@ int main(){
     frutas.empty();//me muestra si esta
     frutas.size();//tamaño
     frutas.max_size(); //maximo de elementos de una lista
-    
+    auto it2=next(frutas.end(),3); //
+
 
     return 0;
 
