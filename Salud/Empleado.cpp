@@ -1,4 +1,7 @@
-#include"persona1.cpp"
+
+#include<iostream>
+#include"/persona1.cpp"
+using namespace std;
 //lo incluye en la estructura, importar trae todo el paquete no more.
 
 class Empleado:public Persona1{
