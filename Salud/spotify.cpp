@@ -51,15 +51,14 @@ void agregarCancion(){
     aux.setNomCancion(a);
     aux.setArtista(b);
     aux.setDuracion(c);
+
 }
 
-
-
-   
-
 int main() {
+    canciones.
     int opcion;
     list<string> canciones;
+    
     list<string> canciones2;
     cout<<"Bienvenido a esta lista general, mira las opciones que tenemos: "<<endl;
     canciones.push_back("La noche mas linda del mundo, salsa");
