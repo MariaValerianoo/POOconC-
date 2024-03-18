@@ -55,7 +55,8 @@ void agregarCancion(){
 }
 
 int main() {
-    canciones.
+    canciones.agregarCancion();
+    int hola;
     int opcion;
     list<string> canciones;
     
