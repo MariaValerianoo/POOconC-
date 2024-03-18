@@ -3,6 +3,60 @@
 #include <string>
 using namespace std;
 
+class Cancion{
+    private:
+    string nomCancion;
+    string artista;
+    float duracion;
+    public:
+    Cancion(string nombre, string art, float dur) {
+        nomCancion = nombre;
+        artista = art;
+        duracion = dur;
+    }
+    string getNomCancion() const {
+        return nomCancion;
+    }
+
+    string getArtista() const {
+        return artista;
+    }
+
+    float getDuracion() const {
+        return duracion;
+    }
+    void setNomCancion(string nombre) {
+        nomCancion = nombre;
+    }
+
+    void setArtista(string art) {
+        artista = art;
+    }
+
+    void setDuracion(float dur) {
+        duracion = dur;
+    }
+};
+void agregarCancion(){
+    Cancion aux;
+    string a;
+    string b;
+    float c;
+    cout<<"Cual es el nombre de la cancion?\n";
+    cin>>a;
+    cout<<"Cual es el artista de la cancion?\n";
+    cin>>b;
+    cout<<"Cual es la duracion de la cancion?\n";
+    cin>>c;
+    aux.setNomCancion(a);
+    aux.setArtista(b);
+    aux.setDuracion(c);
+}
+
+
+
+   
+
 int main() {
     int opcion;
     list<string> canciones;
