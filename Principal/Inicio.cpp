@@ -24,11 +24,10 @@ int main(){
         }else if(pesoActual>25.0){
             cout<<"Tienes sobrepeso:("<<endl;
         };
-    /*empleado:: getfechaNacimiento();
-    empleado:: getaño();*/
+    empleado get_fechaNacimiento();
+    empleado get_dato();
     empleado.mostrarDatos();
-    /*int fechaNacimiento,año;
-    empleado.mayorEdad(fechaNacimiento, año);*/
+    empleado.mayorEdad(fechaNacimiento, año);
     return 0;
 }
 

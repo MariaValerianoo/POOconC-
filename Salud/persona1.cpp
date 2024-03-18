@@ -103,6 +103,9 @@ class Persona1{
         return apellido;
 
     }
+    Persona1(){
+
+    };
 
 
 

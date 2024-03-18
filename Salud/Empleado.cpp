@@ -87,6 +87,9 @@ class Empleado:public Persona1{
         return honorarios;
 
     }
+    Empleado(){
+
+    };
 
     public:
     void pedirDatos(){

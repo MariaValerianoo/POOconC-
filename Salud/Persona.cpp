@@ -14,6 +14,9 @@ class Persona{
     int sexo;
     double peso;
     //Accesores set para modificar y get para mostrar 
+    Persona(){
+
+    };
 
     void settipoDoc(int _tipoDoc){
 
