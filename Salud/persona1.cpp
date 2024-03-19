@@ -13,6 +13,9 @@ class Persona1{
     int edad;
     int sexo;
     double peso;
+    
+
+    public:
     //Accesores set para modificar y get para mostrar 
 
     void settipoDoc(int _tipoDoc){
@@ -110,8 +113,6 @@ class Persona1{
 
 
     
-
-    public:
     void pedirDatos(){
         cout<<"Ingresa tu tipo de documento\n 1)Cedula \n 2)Tarjeta de identidad \n 3)cedula extranjeria"<<endl;
         cin>>tipoDoc;

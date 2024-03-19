@@ -1,6 +1,6 @@
 
 #include<iostream>
-#include"/persona1.cpp"
+#include"./persona1.cpp"
 using namespace std;
 //lo incluye en la estructura, importar trae todo el paquete no more.
 
@@ -13,6 +13,8 @@ class Empleado:public Persona1{
     int fechaNacimiento;
     int año;
     double honorarios;
+    
+    public:
     void setDepartamento(string _departamento){
 
         departamento = _departamento;
@@ -94,7 +96,6 @@ class Empleado:public Persona1{
 
     };
 
-    public:
     void pedirDatos(){
         cout<<"En cual departamento trabajas?:  "<<endl;
         cin>>departamento;
@@ -117,7 +118,7 @@ class Empleado:public Persona1{
         double reteica=0.00966;
         honorarios=(horasTrabajadas*valorHora)-((horasTrabajadas*valorHora)*reteica);
     };
-    int mayorEdad(int fechaNacimiento, int año){
+    int mayorEdad(){
         int edad;
         edad=año-fechaNacimiento;
         if (edad>=18){
@@ -128,7 +129,7 @@ class Empleado:public Persona1{
         return edad;
     };
     void mostrarDatos(){
-        Persona1 mostrarPersonal();
+        Persona1::mostrarPersonal();
         cout<<"Tu cargo es: "<<cargo<<endl;
         cout<<"Tus horas trabajadas son: "<<horasTrabajadas<<endl;
         cout<<"Tus honorarios son: "<<honorarios<<endl;
