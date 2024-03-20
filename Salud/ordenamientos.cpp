@@ -92,12 +92,11 @@ void ordeLista(Node* & head){
 }*/
 
 class Carta{
-    class Cartas {
 private:
     string cart[12];
 
 public:
-    Cartas() {
+    Carta() {
         cart[0] = "9";
         cart[1] = "j";
         cart[2] = "q";
@@ -126,9 +125,6 @@ public:
         }
     }
 };
-
-
-};
 /*int main(){
     int arr[]={115,45,85,485,685,471,652,6412,5852,85};
     int n=sizeof(arr)/sizeof(arr[0]);  //sizeoff es el metodo para guardar el espacio de memoria
@@ -141,12 +137,12 @@ public:
 }*/
 int main(){
     Carta hola;
-    int n=sizeof(cart)/sizeof(cart[0]);
+    int n=sizeof(hola)/sizeof(hola[0]);
     cout<<"El vector original es: "<<" ";
     vecOrd(hola,n);
     ordBur(hola,n);
     cout<<"El vector ordenado es: "<<" ";
-    vecOrd(cart,n);
+    vecOrd(hola,n);
     return 0;
 
 
