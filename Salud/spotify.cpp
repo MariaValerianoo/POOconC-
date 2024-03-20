@@ -9,10 +9,8 @@ class Cancion{
     string artista;
     float duracion;
     public:
-    Cancion(string nombre, string art, float dur) {
-        nomCancion = nombre;
-        artista = art;
-        duracion = dur;
+    Cancion() {
+        
     }
     string getNomCancion() const {
         return nomCancion;
@@ -37,7 +35,7 @@ class Cancion{
         duracion = dur;
     }
 };
-void agregarCancion(){
+cancion agregarCancion(){
     Cancion aux;
     string a;
     string b;
@@ -52,6 +50,8 @@ void agregarCancion(){
     aux.setArtista(b);
     aux.setDuracion(c);
 
+    return aux;
+
 }
 
 int main() {
@@ -61,6 +61,7 @@ int main() {
     list<string> canciones;
     
     list<string> canciones2;
+    list<string>canciones3;
     cout<<"Bienvenido a esta lista general, mira las opciones que tenemos: "<<endl;
     canciones.push_back("La noche mas linda del mundo, salsa");
     canciones.push_back("Persona Ideal, salsa");
