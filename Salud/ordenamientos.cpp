@@ -3,18 +3,18 @@ using namespace std;
 /* ordenamiento de arrays*/
 //metodo de la clase carta
 void ordBur(string cart[],string n){
-    for(int i=0;i<n-1;i++){
-        for(int j=0;j<n-i-1;j++){
-            int temp=cart[j];
-            arr[j]=cart[j+1];
-            arr[j+1]=temp;
+    for(string i=0;i<n-1;i++){
+        for(string j=0;j<n-i-1;j++){
+            string temp=cart[j];
+            cart[j]=cart[j+1];
+            cart[j+1]=temp;
         }
     }
 
 }
 //mostrar el vector
 void vecOrd(string cart[],string tamanio){
-    for(int i=0;i<tamanio;i++){
+    for(string i=0;i<tamanio;i++){
         cout<<cart[i]<<" ";
         cout<<endl;
     }
@@ -136,13 +136,13 @@ public:
     return 0;
 }*/
 int main(){
-    Carta hola;
-    int n=sizeof(hola)/sizeof(hola[0]);
+    string cart[12]={"9","j","q","k","a","2","3","4","5","6","7","8"};
+    string n=sizeof(cart)/sizeof(cart[0]);
     cout<<"El vector original es: "<<" ";
-    vecOrd(hola,n);
-    ordBur(hola,n);
+    vecOrd(cart,n);
+    ordBur(cart,n);
     cout<<"El vector ordenado es: "<<" ";
-    vecOrd(hola,n);
+    vecOrd(cart,n);
     return 0;
 
 
