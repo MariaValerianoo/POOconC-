@@ -3,15 +3,15 @@
 #include <string>
 using namespace std;
 
-class Cancion{
-    private:
+class Cancion {
+private:
     string nomCancion;
     string artista;
     float duracion;
-    public:
-    Cancion() {
-        
-    }
+
+public:
+    Cancion() {}
+
     string getNomCancion() const {
         return nomCancion;
     }
@@ -23,6 +23,7 @@ class Cancion{
     float getDuracion() const {
         return duracion;
     }
+
     void setNomCancion(string nombre) {
         nomCancion = nombre;
     }
@@ -35,34 +36,32 @@ class Cancion{
         duracion = dur;
     }
 };
-cancion agregarCancion(){
+
+Cancion agregarCancion() {
     Cancion aux;
     string a;
     string b;
     float c;
-    cout<<"Cual es el nombre de la cancion?\n";
-    cin>>a;
-    cout<<"Cual es el artista de la cancion?\n";
-    cin>>b;
-    cout<<"Cual es la duracion de la cancion?\n";
-    cin>>c;
+    cout << "Cual es el nombre de la cancion?\n";
+    cin >> a;
+    cout << "Cual es el artista de la cancion?\n";
+    cin >> b;
+    cout << "Cual es la duracion de la cancion?\n";
+    cin >> c;
     aux.setNomCancion(a);
     aux.setArtista(b);
     aux.setDuracion(c);
 
     return aux;
-
 }
 
 int main() {
-    canciones.agregarCancion();
-    int hola;
+    agregarCancion();
     int opcion;
     list<string> canciones;
-    
+
     list<string> canciones2;
-    list<string>canciones3;
-    cout<<"Bienvenido a esta lista general, mira las opciones que tenemos: "<<endl;
+    cout << "Bienvenido a esta lista general, mira las opciones que tenemos: " << endl;
     canciones.push_back("La noche mas linda del mundo, salsa");
     canciones.push_back("Persona Ideal, salsa");
     canciones.push_back("Luna, reguetón");
@@ -72,24 +71,25 @@ int main() {
         cout << elemento << endl;
     }
     cout << endl;
-    
+
     do {
         cout << "¿Qué canción te gustaría agregar a tus 'Me gusta'?" << endl;
         string nueva_cancion;
+        cin.ignore(); // Ignore newline character left in the buffer
         getline(cin, nueva_cancion);
         canciones2.push_back(nueva_cancion);
         cout << "¡Canción agregada a tus 'Me gusta'!" << endl;
-        
+
         cout << "Te gustaría agregar otra canción?: \n 1) Si \n 2) No \n";
         cin >> opcion;
-        cin.ignore(); 
-        
+        cin.ignore(); // Ignore newline character left in the buffer
+
         if (opcion != 1 && opcion != 2) {
             cout << "Opción no válida. Por favor, ingresa 1 o 2." << endl;
         }
-        
+
     } while (opcion == 1);
-    
+
     cout << "Tu lista de me gusta es: " << endl;
     for (const auto &elemento : canciones2) {
         cout << elemento << endl;
