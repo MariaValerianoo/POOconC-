@@ -37,7 +37,7 @@ public:
     }
 };
 
-Cancion agregarCancion() {
+Cancion agregarCancion(int opcion) {
     Cancion aux;
     string a;
     string b;
@@ -53,26 +53,84 @@ Cancion agregarCancion() {
     aux.setDuracion(c);
 
     return aux;
-}
+}class Nodo {
+public:
+    int dato;
+    Nodo* siguiente;
+
+    Nodo(int valor) {
+        dato = valor;
+        siguiente = nullptr;
+    }
+};
+
+class ListaEnlazada {
+private:
+    Nodo* cabeza;
+
+public:
+    ListaEnlazada() {
+        cabeza = nullptr;
+    }
+
+    void agregarAlInicio(int valor) {
+        Nodo* nuevoNodo = new Nodo(valor);
+        nuevoNodo->siguiente = cabeza;
+        cabeza = nuevoNodo;
+    }
+
+    void imprimir() {
+        Nodo* temp = cabeza;
+        while (temp != nullptr) {
+            cout << temp->dato << " ";
+            temp = temp->siguiente;
+        }
+        cout << endl;
+    }
+
+    bool buscar(int valor) {
+        Nodo* temp = cabeza;
+        while (temp != nullptr) {
+            if (temp->dato == valor) {
+                return true;
+            }
+            temp = temp->siguiente;
+        }
+        return false;
+    }
+};
 
 int main() {
-    agregarCancion();
     int opcion;
-    list<string> canciones;
+    do{ 
+        cout<<"Bienvenido a spotify \n ¿Que deseas hacer?: \n"; 
+        cout<<"1) Ir a tu lista general \n 2) Ir a tu lista \n 3)Ir a la lista de tu amigo\n 4)Ir a tu lista compartida\n 5)Salir\n";
+        switch
+        
 
-    list<string> canciones2;
-    cout << "Bienvenido a esta lista general, mira las opciones que tenemos: " << endl;
-    canciones.push_back("La noche mas linda del mundo, salsa");
-    canciones.push_back("Persona Ideal, salsa");
-    canciones.push_back("Luna, reguetón");
-    canciones.push_back("Sabes una cosa, Balada");
-    canciones.push_back("Lady madriz, Reguetón");
-    for (const auto &elemento : canciones) {
-        cout << elemento << endl;
+    }while()
+    
+    list<Cancion> canciones;
+    do{
+        cout<<"Bienvenido esta va a ser tu lista general \n";
+        cout<<"Empecemos a agregar canciones: \n";
+        canciones.push_back(agregarCancion(opcion));
+        for (const auto &cancion : canciones) {
+            cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
+        }
+
+
+
     }
-    cout << endl;
+    cout<<"Bienvenido a spotify esta va a ser tu lista general \n";
+    cout<<"Empecemos a agregar canciones: \n";
+    canciones.push_back(agregarCancion(opcion));
+    for (const auto &cancion : canciones) {
+        cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
+    }
 
-    do {
+
+    /*do {
         cout << "¿Qué canción te gustaría agregar a tus 'Me gusta'?" << endl;
         string nueva_cancion;
         cin.ignore(); // Ignore newline character left in the buffer
@@ -93,7 +151,7 @@ int main() {
     cout << "Tu lista de me gusta es: " << endl;
     for (const auto &elemento : canciones2) {
         cout << elemento << endl;
-    }
+    }*/
 
     return 0;
 }
