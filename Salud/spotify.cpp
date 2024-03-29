@@ -59,53 +59,6 @@ Cancion agregarCancion(int opcion) {
     return aux;
 }
 
-class Nodo {
-public:
-    int dato;
-    Nodo* siguiente;
-
-    Nodo(int valor) {
-        dato = valor;
-        siguiente = nullptr;
-    }
-};
-
-class ListaEnlazada {
-private:
-    Nodo* cabeza;
-
-public:
-    ListaEnlazada() {
-        cabeza = nullptr;
-    }
-
-    void agregarAlInicio(int valor) {
-        Nodo* nuevoNodo = new Nodo(valor);
-        nuevoNodo->siguiente = cabeza;
-        cabeza = nuevoNodo;
-    }
-
-    void imprimir() {
-        Nodo* temp = cabeza;
-        while (temp != nullptr) {
-            cout << temp->dato << " ";
-            temp = temp->siguiente;
-        }
-        cout << endl;
-    }
-
-    bool buscar(int valor) {
-        Nodo* temp = cabeza;
-        while (temp != nullptr) {
-            if (temp->dato == valor) {
-                return true;
-            }
-            temp = temp->siguiente;
-        }
-        return false;
-    }
-};
-
 void listaGene(list<Cancion>& lista) {
     int op2;
     cout << "Bienvenido esta va a ser tu lista general \n";
@@ -240,6 +193,116 @@ void listaAmigo(list<Cancion>& listaGeneral) {
     
     
 }
+class Nodo {
+public:
+    Cancion dato; 
+    Nodo* siguiente;
+
+    Nodo(const Cancion& cancion) : dato(cancion), siguiente(nullptr) {}
+};
+
+class ListaEnlazada {
+private:
+    Nodo* cabeza;
+
+public:
+    ListaEnlazada() {
+        cabeza = nullptr;
+    }
+
+    void agregarAlInicio(const Cancion& cancion) { 
+        Nodo* nuevoNodo = new Nodo(cancion); 
+        nuevoNodo->siguiente = cabeza;
+        cabeza = nuevoNodo;
+    }
+
+    void imprimir() {
+        Nodo* temp = cabeza;
+        while (temp != nullptr) {
+            cout << "Nombre: " << temp->dato.getNomCancion() << ", Artista: " << temp->dato.getArtista() << ", Duracion: " << temp->dato.getDuracion() << endl;
+            temp = temp->siguiente;
+        }
+        cout << endl;
+    }
+};
+
+void compartida(list<Cancion>& listaAmigo, list<Cancion>& miLista) {
+    ListaEnlazada lista; 
+    Node*head=nullptr;
+    ordeLista(head);
+    imprimirLista(head);
+
+    for (const auto& cancion : listaAmigo) {
+        lista.agregarAlInicio(cancion);
+    }
+
+    for (const auto& cancion : miLista) {
+        lista.agregarAlInicio(cancion);
+    }
+    ordeLista(head);
+    imprimirLista(head);
+}
+/* ordenamiento de listas*/
+struct Node{
+    int data;
+    Node* next;
+    Node(int val):data(val),next(nullptr){    }
+};
+//funcion para insertar un nodo al principio de la lista
+void insertInicio(Node* &head,int val){
+    Node*nuevoNodo= new Node (val);
+    nuevoNodo->next=head;
+    head=nuevoNodo;
+}
+
+//funcion para imprimirla lista
+void imprimirLista(Node* head){
+    while(head!=nullptr){
+        cout<<head->data <<" ";
+        head=head->next;
+
+    }
+    cout<<endl;
+}
+//funcion para ordenar
+void ordeLista(Node* & head){
+    if(head==nullptr|| head->next==nullptr)
+    return;
+    Node* sorted=nullptr;
+    Node* current=head;
+    while(current!=nullptr){
+        Node* nextNode=current->next;
+        if(sorted==nullptr || sorted->data >= current->data){
+            current->next=sorted;
+            sorted=current;
+        }else{
+            Node* temp=sorted;
+            while(temp->next!=nullptr && temp->next->data < current->data){
+                temp=temp->next;
+            }
+            current->next=temp->next;
+            temp->next=current;
+        }
+        current=nextNode;
+    }
+    head=sorted;
+
+};
+/*int main(){
+    Node*head=nullptr;
+    insertInicio(head,50);
+    insertInicio(head,70);
+    insertInicio(head,0);
+    insertInicio(head,20);
+    cout<<"Listas original es: "<<endl;
+    imprimirLista(head);
+    ordeLista(head);
+    cout<<"Listas original es: "<<endl;
+    imprimirLista(head);
+    return 0;
+
+
+}*/
 
 
 int main() {
