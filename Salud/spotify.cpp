@@ -12,6 +12,8 @@ private:
 public:
     Cancion() {}
 
+    Cancion(string nombre, string art, float dur) : nomCancion(nombre), artista(art), duracion(dur) {}
+
     string getNomCancion() const {
         return nomCancion;
     }
@@ -43,9 +45,11 @@ Cancion agregarCancion(int opcion) {
     string b;
     float c;
     cout << "Cual es el nombre de la cancion?\n";
-    cin >> a;
+    cin.ignore(); 
+    getline(cin, a);
     cout << "Cual es el artista de la cancion?\n";
-    cin >> b;
+    cin.ignore(); 
+    getline(cin, b);
     cout << "Cual es la duracion de la cancion?\n";
     cin >> c;
     aux.setNomCancion(a);
@@ -53,7 +57,9 @@ Cancion agregarCancion(int opcion) {
     aux.setDuracion(c);
 
     return aux;
-}class Nodo {
+}
+
+class Nodo {
 public:
     int dato;
     Nodo* siguiente;
@@ -100,59 +106,169 @@ public:
     }
 };
 
-int main() {
-    int opcion;
-    do{ 
-        cout<<"Bienvenido a spotify \n ¿Que deseas hacer?: \n"; 
-        cout<<"1) Ir a tu lista general \n 2) Ir a tu lista \n 3)Ir a la lista de tu amigo\n 4)Ir a tu lista compartida\n 5)Salir\n";
-        
-
-
-
-    }while()
-    
-    list<Cancion> canciones;
-    do{
-        cout<<"Bienvenido esta va a ser tu lista general \n";
-        cout<<"Empecemos a agregar canciones: \n";
-        canciones.push_back(agregarCancion(opcion));
-        for (const auto &cancion : canciones) {
+void listaGene(list<Cancion>& lista) {
+    int op2;
+    cout << "Bienvenido esta va a ser tu lista general \n";
+    cout << "Empecemos a agregar canciones: \n";
+    do {
+        lista.push_back(agregarCancion(op2)); // Cambio aquí
+        for (const auto& cancion : lista) {
             cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
         }
+        cout << "Quieres agregar otra cancion?\n 1)Si\n 2)No\n";
+        cin >> op2;
+
+    } while (op2 == 1);
+}
 
 
-
-    }
-    cout<<"Bienvenido a spotify esta va a ser tu lista general \n";
-    cout<<"Empecemos a agregar canciones: \n";
-    canciones.push_back(agregarCancion(opcion));
-    for (const auto &cancion : canciones) {
+void miLista(list<Cancion>& listaGeneral) {
+    int opcion;
+    list<Cancion> canciones2;
+    cout << "Bienvenido a tu lista de Me gusta \n";
+    cout << "Tu lista general es: \n";
+    for (const auto& cancion : listaGeneral) {
         cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
     }
+    do {
+        cout << "Que cancion te gustaria agregar a tus Me gusta?" << endl;
+        string nombreCancion;
+        cin.ignore();
+        getline(cin, nombreCancion);
+        
+        bool encontrada = false;
+        for (const auto& cancion : listaGeneral) {
+            if (cancion.getNomCancion() == nombreCancion) {
+                canciones2.push_back(cancion);
+                encontrada = true;
+                cout << "¡Cancion agregada a tus Me gusta!" << endl;
+                break;
+            }
+        }
+        
+        if (!encontrada) {
+            int respuesta;
+            cout << "No se encontro la cancion en tu lista general. Deseas agregarla a la lista general? \n 1)Si \n 2)No" << endl;
+            cin >> respuesta;
+            if (respuesta == 1) {
+                listaGeneral.push_back(agregarCancion(opcion));
+                canciones2.push_back(listaGeneral.back());
+                cout << "Cancion agregada a la lista general y a tus Me gusta!" << endl;
+            }
+        }
 
-
-    /*do {
-        cout << "¿Qué canción te gustaría agregar a tus 'Me gusta'?" << endl;
-        string nueva_cancion;
-        cin.ignore(); // Ignore newline character left in the buffer
-        getline(cin, nueva_cancion);
-        canciones2.push_back(nueva_cancion);
-        cout << "¡Canción agregada a tus 'Me gusta'!" << endl;
-
-        cout << "Te gustaría agregar otra canción?: \n 1) Si \n 2) No \n";
+        cout << "Te gustaria agregar otra cancion?: \n 1) Si \n 2) No \n";
         cin >> opcion;
-        cin.ignore(); // Ignore newline character left in the buffer
+        cin.ignore();
 
         if (opcion != 1 && opcion != 2) {
-            cout << "Opción no válida. Por favor, ingresa 1 o 2." << endl;
+            cout << "Opcion no valida. Por favor, ingresa 1 o 2." << endl;
         }
 
     } while (opcion == 1);
 
     cout << "Tu lista de me gusta es: " << endl;
     for (const auto &elemento : canciones2) {
-        cout << elemento << endl;
-    }*/
+        cout << "Nombre: " << elemento.getNomCancion() << ", Artista: " << elemento.getArtista() << ", Duracion: " << elemento.getDuracion() << endl;
+    }
+}
+void listaAmigo(list<Cancion>& listaGeneral) {
+    int opcion;
+    list<Cancion> canciones3;
+    cout << "Bienvenido a tu lista de Me gusta \n";
+    cout << "Tu lista general es: \n";
+    for (const auto& cancion : listaGeneral) {
+        cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
+    }
+    cout << "Que te gustaria hacer?\n ";
+    cout << "1)Agregar canciones\n2)Ver lista de reproduccion ";
+    cin>>opcion;
+    if (opcion==1 )
+    {
+        do {
+        cout << "Tu lista general es: \n";
+        for (const auto& cancion : listaGeneral) {
+            cout << "Nombre: " << cancion.getNomCancion() << ", Artista: " << cancion.getArtista() << ", Duracion: " << cancion.getDuracion() << endl;
+        }   
+        cout << "Que cancion te gustaria agregar a tus Me gusta?" << endl;
+        string nombreCancion;
+        cin.ignore();
+        getline(cin, nombreCancion);
+        
+        bool encontrada = false;
+        for (const auto& cancion : listaGeneral) {
+            if (cancion.getNomCancion() == nombreCancion) {
+                canciones3.push_back(cancion);
+                encontrada = true;
+                cout << "¡Cancion agregada a tus Me gusta!" << endl;
+                break;
+            }
+        }
+        
+        if (!encontrada) {
+            int respuesta;
+            cout << "No se encontro la cancion en tu lista general. Deseas agregarla a la lista general? \n 1)Si \n 2)No" << endl;
+            cin >> respuesta;
+            if (respuesta == 1) {
+                listaGeneral.push_back(agregarCancion(opcion));
+                canciones3.push_back(listaGeneral.back());
+                cout << "Cancion agregada a la lista general y a tus Me gusta!" << endl;
+            }
+        }
+
+        cout << "Te gustaria agregar otra cancion?: \n 1) Si \n 2) No \n";
+        cin >> opcion;
+        cin.ignore();
+
+        if (opcion != 1 && opcion != 2) {
+            cout << "Opcion no valida. Por favor, ingresa 1 o 2." << endl;
+        }
+
+    } while (opcion == 1);
+
+    cout << "Tu lista de me gusta es: " << endl;
+    for (const auto &elemento : canciones3) {
+        cout << "Nombre: " << elemento.getNomCancion() << ", Artista: " << elemento.getArtista() << ", Duracion: " << elemento.getDuracion() << endl;
+    }
+    }else if(opcion==2){
+        cout << "Tu lista de me gusta es: " << endl;
+    for (const auto &elemento : canciones3) {
+        cout << "Nombre: " << elemento.getNomCancion() << ", Artista: " << elemento.getArtista() << ", Duracion: " << elemento.getDuracion() << endl;
+    }
+
+    }
+    
+    
+}
+
+
+int main() {
+    int num;
+    list<Cancion> listaGeneral;
+    while (true) {
+        cout << "Bienvenido a spotify \n Que deseas hacer?: \n";
+        cout << "1) Ir a tu lista general \n2) Ir a tu lista \n3)Ir a la lista de tu amigo\n4)Ir a tu lista compartida\n5)Salir\n";
+        cin >> num;
+        switch (num) {
+        case 1:
+            listaGene(listaGeneral);
+            break;
+
+        case 2:
+            miLista(listaGeneral);
+            break;
+        case 3:
+            listaAmigo(listaGeneral);
+            break;
+        case 4:
+            break;
+        case 5:
+            cout << "Gracias por utilizar spotify:) \n";
+            return 0;
+        }
+    }
 
     return 0;
 }
+
+
