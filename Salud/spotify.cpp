@@ -105,8 +105,9 @@ int main() {
     do{ 
         cout<<"Bienvenido a spotify \n ¿Que deseas hacer?: \n"; 
         cout<<"1) Ir a tu lista general \n 2) Ir a tu lista \n 3)Ir a la lista de tu amigo\n 4)Ir a tu lista compartida\n 5)Salir\n";
-        switch
         
+
+
 
     }while()
     
