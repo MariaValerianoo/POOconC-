@@ -1,5 +1,8 @@
 #include<iostream>
 using namespace std;
+class Cuenta{
+    private:
+}
 class Recarga{
 //tiene la opcion, plata al toque, con efectivo, desde otro banco, codigo de regalo
 //plata al toque: el usuario tiene que ser mayor de edad, 
