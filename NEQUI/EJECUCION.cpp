@@ -2,11 +2,12 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <ctime>
 
 using namespace std;
 
 class CuentaNequi {
-protected:
+private:
     string nombreTitular;
     int edad;
     float saldo;
@@ -50,11 +51,15 @@ public:
 class CuentaNequiImpl : public CuentaNequi {
 private:
     vector<float> colchon;
-    vector<float> meta;
-    vector<float> bolsillos;
+    float metaDiaria;
+    float metaSemanal;
+    float metaMensual;
+    time_t ultimoDescuento;
 
 public:
-    CuentaNequiImpl(string _nombreTitular, int _edad, float _saldo) : CuentaNequi(_nombreTitular, _edad, _saldo) {}
+    CuentaNequiImpl(string _nombreTitular, int _edad, float _saldo) : CuentaNequi(_nombreTitular, _edad, _saldo), metaDiaria(0), metaSemanal(0), metaMensual(0) {
+        ultimoDescuento = time(nullptr);
+    }
 
     void recargar(float monto) {
         if (getEdad() >= 18) {
@@ -65,21 +70,30 @@ public:
         }
     }
 
-    void recargar(string tipoBanco, string cuenta, float monto) {
-        realizarMovimiento(monto);
-        cout << "Recarga al toque exitosa. Nuevo saldo: " << getSaldo() << endl;
-    }
-
     void agregarAlColchon(float monto) override {
-        colchon.push_back(monto);
+        if (monto <= getSaldo()) {
+            realizarMovimiento(-monto);
+            colchon.push_back(monto);
+            cout << "Se ha agregado $" << monto << " al colchon." << endl;
+        } else {
+            cout << "Saldo insuficiente para agregar al colchon." << endl;
+        }
     }
 
     void establecerMeta(float montoMeta) override {
-        meta.push_back(montoMeta);
+        metaDiaria = montoMeta / 30; 
+        metaSemanal = montoMeta / 4;  
+        metaMensual = montoMeta;  
+        cout << "Meta establecida correctamente." << endl;
     }
 
     void agregarABolsillos(float monto) override {
-        bolsillos.push_back(monto);
+        if (monto <= getSaldo()) {
+            realizarMovimiento(-monto);
+            cout << "Se ha agregado $" << monto << " a los bolsillos." << endl;
+        } else {
+            cout << "Saldo insuficiente para agregar a los bolsillos." << endl;
+        }
     }
 
     void sacarPlata(float monto) override {
@@ -128,12 +142,43 @@ public:
         }
     }
 
-    void consultarSaldo() const {
-        cout << "Saldo actual: $" << saldo << endl;
+    void realizarDescuento() {
+        time_t ahora = time(nullptr);
+        tm* tiempoLocal = localtime(&ahora);
+        tm* tiempoUltimoDescuento = localtime(&ultimoDescuento);
+
+    
+        if (tiempoLocal->tm_yday != tiempoUltimoDescuento->tm_yday) {
+            realizarMovimiento(-metaDiaria);
+            cout << "Se ha realizado el descuento diario. Nuevo saldo: " << getSaldo() << endl;
+            ultimoDescuento = ahora;
+        }
     }
 
-    void consultarUsuario() const {
-        cout << "Bienvenida " << nombreTitular << endl;
+    void realizarDescuentoSemanal() {
+        time_t ahora = time(nullptr);
+        tm* tiempoLocal = localtime(&ahora);
+        tm* tiempoUltimoDescuento = localtime(&ultimoDescuento);
+
+    
+        if (tiempoLocal->tm_yday / 7 != tiempoUltimoDescuento->tm_yday / 7) {
+            realizarMovimiento(-metaSemanal);
+            cout << "Se ha realizado el descuento semanal. Nuevo saldo: " << getSaldo() << endl;
+            ultimoDescuento = ahora;
+        }
+    }
+
+    void realizarDescuentoMensual() {
+        time_t ahora = time(nullptr);
+        tm* tiempoLocal = localtime(&ahora);
+        tm* tiempoUltimoDescuento = localtime(&ultimoDescuento);
+
+
+        if (tiempoLocal->tm_mon != tiempoUltimoDescuento->tm_mon) {
+            realizarMovimiento(-metaMensual);
+            cout << "Se ha realizado el descuento mensual. Nuevo saldo: " << getSaldo() << endl;
+            ultimoDescuento = ahora;
+        }
     }
 };
 
@@ -150,8 +195,8 @@ int main() {
 
     do {
         cout << "----- Menu -----" << endl;
-        cuenta.consultarUsuario();
-        cuenta.consultarSaldo(); 
+        cout << "Bienvenida " << cuenta.getNombreTitular() << endl;
+        cout << "Saldo actual: $" << cuenta.getSaldo() << endl; 
         cout << "1. Realizar recarga" << endl;
         cout << "2. Agregar al colchon" << endl;
         cout << "3. Establecer meta" << endl;
@@ -173,13 +218,7 @@ int main() {
                     cout << "3. Realizar recarga desde otro banco" << endl;
                     cout << "4. Realizar recarga con codigo de regalo" << endl;
                     cin >> op2;
-                    if (op2 == 1) {
-                        float monto;
-                        cout << "Ingrese el monto a recargar: ";
-                        cin >> monto;
-                        cuenta.recargar(monto);
-                        break;
-                    } else if (op2 == 2) {
+                    if (op2 == 1 || op2 == 2) {
                         float monto;
                         cout << "Ingrese el monto a recargar: ";
                         cin >> monto;
@@ -208,7 +247,7 @@ int main() {
             }
             case 3: {
                 float montoMeta;
-                cout << "Ingrese el monto de la meta: ";
+                cout << "Ingrese el monto de la meta mensual: ";
                 cin >> montoMeta;
                 cuenta.establecerMeta(montoMeta);
                 break;
@@ -253,9 +292,13 @@ int main() {
             default:
                 cout << "Opcion invalida. Por favor, ingrese una opcion valida." << endl;
         }
+
+
+        cuenta.realizarDescuento();
+        cuenta.realizarDescuentoSemanal();
+        cuenta.realizarDescuentoMensual();
+
     } while (opcion != 7);
 
     return 0;
 }
-
-
