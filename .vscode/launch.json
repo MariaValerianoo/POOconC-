@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/maria.LAPTOP-S1RD89HU/OneDrive/Documentos/GitHub/POOconC-/Salud",
-      "program": "c:/Users/maria.LAPTOP-S1RD89HU/OneDrive/Documentos/GitHub/POOconC-/Salud/build/Debug/outDebug",
+      "cwd": "c:/Users/maria.LAPTOP-S1RD89HU/OneDrive/Documentos/GitHub/POOconC-/NEQUI",
+      "program": "c:/Users/maria.LAPTOP-S1RD89HU/OneDrive/Documentos/GitHub/POOconC-/NEQUI/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
