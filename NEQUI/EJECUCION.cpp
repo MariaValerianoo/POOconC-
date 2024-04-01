@@ -6,7 +6,7 @@
 using namespace std;
 
 class CuentaNequi {
-private:
+protected:
     string nombreTitular;
     int edad;
     float saldo;
@@ -127,6 +127,14 @@ public:
             }
         }
     }
+
+    void consultarSaldo() const {
+        cout << "Saldo actual: $" << saldo << endl;
+    }
+
+    void consultarUsuario() const {
+        cout << "Bienvenida " << nombreTitular << endl;
+    }
 };
 
 void limpiarBuffer() {
@@ -135,21 +143,23 @@ void limpiarBuffer() {
 }
 
 int main() {
-    CuentaNequiImpl cuenta("Juan", 20, 1000);
+    CuentaNequiImpl cuenta("Luna", 20, 4000);
     int opcion;
     int op2;
     int op3;
 
     do {
-        cout << "----- Menú -----" << endl;
+        cout << "----- Menu -----" << endl;
+        cuenta.consultarUsuario();
+        cuenta.consultarSaldo(); 
         cout << "1. Realizar recarga" << endl;
-        cout << "2. Agregar al colchón" << endl;
+        cout << "2. Agregar al colchon" << endl;
         cout << "3. Establecer meta" << endl;
         cout << "4. Agregar a bolsillos" << endl;
         cout << "5. Sacar plata" << endl;
         cout << "6. Mostrar movimientos" << endl;
         cout << "7. Salir" << endl;
-        cout << "Ingrese su opción: ";
+        cout << "Ingrese su opcion: ";
         cin >> opcion;
 
         limpiarBuffer();
@@ -161,7 +171,7 @@ int main() {
                     cout << "1. Realizar recarga al toque" << endl;
                     cout << "2. Realizar recarga con efectivo" << endl;
                     cout << "3. Realizar recarga desde otro banco" << endl;
-                    cout << "4. Realizar recarga con código de regalo" << endl;
+                    cout << "4. Realizar recarga con codigo de regalo" << endl;
                     cin >> op2;
                     if (op2 == 1) {
                         float monto;
@@ -175,23 +185,10 @@ int main() {
                         cin >> monto;
                         cuenta.recargar(monto);
                         break;
-                    } else if (op2 == 3) {
-                        string tipoBanco, cuenta;
-                        float saldo;
-                        cout << "Ingrese el tipo de banco: ";
-                        cin.ignore(); 
-                        getline(cin, tipoBanco);
-                        cout << "Ingrese el número de cuenta: ";
-                        getline(cin, cuenta);
-                        cout << "Ingrese el monto a recargar: ";
-                        cin >> saldo;
-                        limpiarBuffer(); 
-                        cuenta.recargar(tipoBanco, cuenta, saldo);
-                        break;
                     } else if (op2 == 4) {
                         string codigo;
                         float monto;
-                        cout << "Ingrese el código de regalo: ";
+                        cout << "Ingrese el codigo de regalo: ";
                         cin >> codigo;
                         monto = stof(codigo);
                         cuenta.recargar(monto);
@@ -204,7 +201,7 @@ int main() {
             }
             case 2: {
                 float monto;
-                cout << "Ingrese el monto a agregar al colchón: ";
+                cout << "Ingrese el monto a agregar al colchon: ";
                 cin >> monto;
                 cuenta.agregarAlColchon(monto);
                 break;
@@ -234,12 +231,12 @@ int main() {
                 cout << "------Movimientos------" << endl;
                 cuenta.mostrarMovimientos();
                 do {
-                    cout << "1. Ordenar movimientos por número" << endl;
+                    cout << "1. Ordenar movimientos por numero" << endl;
                     cout << "2. Ordenar movimientos por letra" << endl;
                     cin >> op3;
                     if (op3 == 1) {
                         cuenta.ordenarMovimientosPorNumero();
-                        cout << "Movimientos ordenados por número." << endl;
+                        cout << "Movimientos ordenados por numero." << endl;
                     } else if (op3 == 2) {
                         cuenta.ordenarMovimientosPorLetra();
                         cout << "Movimientos ordenados por letra." << endl;
@@ -254,10 +251,11 @@ int main() {
                 break;
             }
             default:
-                cout << "Opción inválida. Por favor, ingrese una opción válida." << endl;
+                cout << "Opcion invalida. Por favor, ingrese una opcion valida." << endl;
         }
     } while (opcion != 7);
 
     return 0;
 }
+
 
