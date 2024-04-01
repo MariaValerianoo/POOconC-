@@ -64,7 +64,7 @@ int main() {
     int opcion;
 
     do {
-        cout << "----- Menú Daviplata -----" << endl;
+        cout << "----- Menu Daviplata -----" << endl;
         cuenta.consultarUsuario();
         cuenta.consultarSaldo(); 
         cout << "1. Realizar pago" << endl;
@@ -72,7 +72,7 @@ int main() {
         cout << "3. Consultar saldo" << endl;
         cout << "4. Ver movimientos" << endl;
         cout << "0. Salir" << endl;
-        cout << "Ingrese su opción: ";
+        cout << "Ingrese su opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -104,7 +104,7 @@ int main() {
                 cout << "Saliendo del programa." << endl;
                 break;
             default:
-                cout << "Opción inválida. Por favor, ingrese una opción válida." << endl;
+                cout << "Opcion invalida. Por favor, ingrese una opcion valida." << endl;
         }
     } while (opcion != 0);
 
