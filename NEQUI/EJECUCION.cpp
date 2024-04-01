@@ -1,210 +1,263 @@
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits>
+
 using namespace std;
-class Cuenta{
-    private:
-}
-class Recarga{
-//tiene la opcion, plata al toque, con efectivo, desde otro banco, codigo de regalo
-//plata al toque: el usuario tiene que ser mayor de edad, 
-//recarga con efectivo: te dice a donde deberias ir bien sea un punto nequi o corresponsal bancolombia
-//ademas de que debes hacer en el punto y lo minimo que debes recargar
-//desde otro banco: simula tu un pse, pides el tipo de banco y ademas de ello la cuenta,saldo a recargar y demas
-//codigo de regalo: "Si te diero un codigo para cambiarlo por plata en Nequi, escribe el numero y redimelo facilmente
-    //atributos
-    private: //identificador de acceso
-    double saldo;
-    int codigo;
-    string banco;
-    int tipoCuenta;
-    int numeroRecargar;
-    double valorRecargar;
-    void setcodigo(int _codigo){
 
-        codigo = _codigo;
+class CuentaNequi {
+private:
+    string nombreTitular;
+    int edad;
+    float saldo;
+    vector<float> movimientos;
 
+public:
+    // Constructor
+    CuentaNequi(string nombre, int edad_inicial, float saldo_inicial) : nombreTitular(nombre), edad(edad_inicial), saldo(saldo_inicial) {}
+
+    // Accesores
+    string getNombreTitular() const {
+        return nombreTitular;
     }
 
-    int getcodigo(){
-
-        return codigo;
-
-    }
-    void settipoCuenta(int _tipoCuenta){
-
-        tipoCuenta = _tipoCuenta;
-
+    int getEdad() const {
+        return edad;
     }
 
-    int getnumeroRecargar(){
-
-        return numeroRecargar;
-
-    }
-    void setnumeroRecargar(int _numeroRecargar){
-
-        numeroRecargar = _numeroRecargar;
-
-    }
-
-    int getnumeroRecargar(){
-
-        return numeroRecargar;
-
-    }
-    void setsaldo(double _saldo){
-
-        saldo = _saldo;
-
-    }
-
-    double getsaldo(){
-
+    float getSaldo() const {
         return saldo;
-
-    }
-    void setvalorRecargar(double _valorRecargar){
-
-        valorRecargar = _valorRecargar;
-
     }
 
-    double getvalorRecargar(){
-
-        return valorRecargar;
-
+    vector<float> getMovimientos() const {
+        return movimientos;
     }
-    
-    
-    
-    //metodos modificador de acceso,valor de retorno, nombre (parametro)
-    public:
-    void plataToque(){
-        cout<<"Por favor registra tu numero de cuenta";
-        cin>>tipoCuenta;
-    };
-    void efectivo(){
-        cout<<"RECARGA CON EFECTIVO "<<endl;
-        cout<<"Ve a un punto nequi o Corresponsal Bancolombia "<<endl;
-        cout<<"Busca tu punto mas cercano "<<endl;
-        cout<<"Dile al encargadp que vas a recargar Nequi "<<endl;
-        cout<<"-Tu numero de Nequi es tu numero de celular \n -Lo minimo que puedes recargar son $10.000"<<endl;
-        //aqui va el ver los puntos d recarga
 
-    };
-    void desdeOtroBanco(){
-        int opcion;
-        int confirmacionNumRecargar;
-        int tipoPersona;
-        cout<<"Usa PSE\n ¿Por qué PSE?"<<endl;
-        cout<<"Es un medio de pago rapido y seguro, que te permite recargar Nequi desde cualquier cuenta bancaria\n";
-        cout<<"Estas listo?\n 1)Si \n 2)No"<<endl;
-        cin>>opcion;
-        if (opcion==1){
-            cout<<"Recarga tu Nequi"<<endl;
-            cout<<"Numero de celular: "<<endl;
-            cin>>numeroRecargar;
-            cout<<"Confirma el numero de celular: "<<endl;
-            cin>>confirmacionNumRecargar;
-            cout<<"¿Cuanto?"
-            cin>>valorRecargar;
-            cout<<"Tipo de persona: \n 1)Natural \n 2)Juridica"<<endl;
-            cin>>tipoPersona;
+    void realizarMovimiento(float monto) {
+        saldo += monto;
+        movimientos.push_back(monto);
+    }
+
+    virtual void ordenarMovimientosPorLetra() = 0;
+    virtual void ordenarMovimientosPorNumero() = 0;
+    virtual void agregarAlColchon(float monto) = 0;
+    virtual void establecerMeta(float montoMeta) = 0;
+    virtual void agregarABolsillos(float monto) = 0;
+    virtual void sacarPlata(float monto) = 0;
+    virtual void mostrarMovimientos() = 0;
+};
+
+class CuentaNequiImpl : public CuentaNequi {
+private:
+    vector<float> colchon;
+    vector<float> meta;
+    vector<float> bolsillos;
+
+public:
+    CuentaNequiImpl(string _nombreTitular, int _edad, float _saldo) : CuentaNequi(_nombreTitular, _edad, _saldo) {}
+
+    void recargar(float monto) {
+        if (getEdad() >= 18) {
+            realizarMovimiento(monto);
+            cout << "Recarga al toque exitosa. Nuevo saldo: " << getSaldo() << endl;
+        } else {
+            cout << "El usuario no es mayor de edad." << endl;
         }
-
-        };
-    void codigoRegalo(){
-        cout<<"Aun no sabemos como funciona\n";
-    };
-
-    };
-
-class Colchon{
-//te pregunta el monto que vas a ingresar y este debe ser obviamente inferior a tu saldo
-//despues este monto puede ser protegido
-//si lo quieres proteger te da 3 opciones: tiempo(
-
-    //atributos
-    public: //identificador de acceso
-    int saldo;
-    int monto;
-    //metodos modificador de acceso,valor de retorno, nombre (parametro)
-    public:
-    void guardarSaldo(){
-        cout<<"Por favor dime el saldo que quieres ingresar: ";
-        cin>>leerSaldo;
     }
-    void protegerMonto(){
-        cout<<"Quieres proteger el monto? \n";
-        cin>>leerMontoGuardar;
-    }
-};
-class Meta{
-//
-    //atributos
-    public: //identificador de acceso
-    int saldo;
-    string tiempo;
-    int meta;
-    //metodos modificador de acceso,valor de retorno, nombre (parametro)
-    public:
-    void crearMeta(){
-        cout<<"De cuanto es la meta que quieres tener?";
-        cin>>leerMeta;
-    }
-};
-class Bolsillos{
-    //atributos
-    public: //identificador de acceso
-    string bolsillo1;
-    int valor;
-    //metodos modificador de acceso,valor de retorno, nombre (parametro)
-    public:
-    void crearBolsillo(){
-        cout<<"Que nombre le quieres agregar a tu bolsillo?";
-        cin>>nombre.bolsillo1;
-        cout<<"Cual es el saldo que vas a tener en el?\n";
-        cin>>leer.valor;
-        cout<<"El bolsillo fue creado exitosamente:) "<<endl;
-        cout<<bolsillo1<<endl;
-        cout<<valor<<endl;
-    }
-};
 
-int main(){
-    Recarga person1;
-    Colchon person1;
-    Meta person1;
-    Bolsillos person1;
-    int opcion;
-    cout<<"Bienvenido a nequi:) \n";
-    cout<<"Que opcion deseas elegir?\n ";
-    cout<<"1)Recargar Nequi\n 2)Colchon\n3)Metas\n4)Bolsillos\n";
-    cin>>opcion;
-    switch (opcion)
-    {
-    case 1:
-        cout<<"Que opcion deseas elegir?: \n";
-        cout<<"1)Plata al toque\n 2)Efectivo\n 3)Desde otros bancos\n 4)Codigo de regalo\n";
-        cin>>opcion;
-        switch (opcion)
-        {
-        case 1:
-            person1.plataToque();
-            break;
-        
-        default 2:
-            person1.efectivo();
-            break;
-        default 3:
-            person1.desdeOtroBanco();
-            break;
-        default 4:
-            person1.codigoRegalo();
+    void recargar(string tipoBanco, string cuenta, float monto) {
+        realizarMovimiento(monto);
+        cout << "Recarga al toque exitosa. Nuevo saldo: " << getSaldo() << endl;
+    }
 
+    void agregarAlColchon(float monto) override {
+        colchon.push_back(monto);
+    }
+
+    void establecerMeta(float montoMeta) override {
+        meta.push_back(montoMeta);
+    }
+
+    void agregarABolsillos(float monto) override {
+        bolsillos.push_back(monto);
+    }
+
+    void sacarPlata(float monto) override {
+        if (getSaldo() >= monto) {
+            realizarMovimiento(-monto);
+            cout << "Retiro exitoso. Nuevo saldo: " << getSaldo() << endl;
+        } else {
+            cout << "Saldo insuficiente." << endl;
         }
-    
-    default:
-        break;
     }
 
+    void mostrarMovimientos() override {
+        cout << "Historial de movimientos:" << endl;
+        for (const auto& movimiento : getMovimientos()) {
+            if (movimiento > 0) {
+                cout << "Recarga: " << movimiento << " COP" << endl;
+            } else {
+                cout << "Retiro: " << -movimiento << " COP" << endl;
+            }
+        }
+    }
+
+    void ordenarMovimientosPorNumero() override {
+        int n = getMovimientos().size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (getMovimientos()[j] < getMovimientos()[j + 1]) {
+                    float temp = getMovimientos()[j];
+                    getMovimientos()[j] = getMovimientos()[j + 1];
+                    getMovimientos()[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void ordenarMovimientosPorLetra() override {
+        int n = getMovimientos().size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (to_string(getMovimientos()[j])[0] > to_string(getMovimientos()[j + 1])[0]) {
+                    float temp = getMovimientos()[j];
+                    getMovimientos()[j] = getMovimientos()[j + 1];
+                    getMovimientos()[j + 1] = temp;
+                }
+            }
+        }
+    }
+};
+
+void limpiarBuffer() {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
+
+int main() {
+    CuentaNequiImpl cuenta("Juan", 20, 1000);
+    int opcion;
+    int op2;
+    int op3;
+
+    do {
+        cout << "----- Menú -----" << endl;
+        cout << "1. Realizar recarga" << endl;
+        cout << "2. Agregar al colchón" << endl;
+        cout << "3. Establecer meta" << endl;
+        cout << "4. Agregar a bolsillos" << endl;
+        cout << "5. Sacar plata" << endl;
+        cout << "6. Mostrar movimientos" << endl;
+        cout << "7. Salir" << endl;
+        cout << "Ingrese su opción: ";
+        cin >> opcion;
+
+        limpiarBuffer();
+
+        switch (opcion) {
+            case 1: {
+                do {
+                    cout << "Bienvenido a la opcion de recargar " << endl;
+                    cout << "1. Realizar recarga al toque" << endl;
+                    cout << "2. Realizar recarga con efectivo" << endl;
+                    cout << "3. Realizar recarga desde otro banco" << endl;
+                    cout << "4. Realizar recarga con código de regalo" << endl;
+                    cin >> op2;
+                    if (op2 == 1) {
+                        float monto;
+                        cout << "Ingrese el monto a recargar: ";
+                        cin >> monto;
+                        cuenta.recargar(monto);
+                        break;
+                    } else if (op2 == 2) {
+                        float monto;
+                        cout << "Ingrese el monto a recargar: ";
+                        cin >> monto;
+                        cuenta.recargar(monto);
+                        break;
+                    } else if (op2 == 3) {
+                        string tipoBanco, cuenta;
+                        float saldo;
+                        cout << "Ingrese el tipo de banco: ";
+                        cin.ignore(); 
+                        getline(cin, tipoBanco);
+                        cout << "Ingrese el número de cuenta: ";
+                        getline(cin, cuenta);
+                        cout << "Ingrese el monto a recargar: ";
+                        cin >> saldo;
+                        limpiarBuffer(); 
+                        cuenta.recargar(tipoBanco, cuenta, saldo);
+                        break;
+                    } else if (op2 == 4) {
+                        string codigo;
+                        float monto;
+                        cout << "Ingrese el código de regalo: ";
+                        cin >> codigo;
+                        monto = stof(codigo);
+                        cuenta.recargar(monto);
+                        break;
+                    } else {
+                        cout << "Opcion invalida" << endl;
+                    }
+                } while (true);
+                break;
+            }
+            case 2: {
+                float monto;
+                cout << "Ingrese el monto a agregar al colchón: ";
+                cin >> monto;
+                cuenta.agregarAlColchon(monto);
+                break;
+            }
+            case 3: {
+                float montoMeta;
+                cout << "Ingrese el monto de la meta: ";
+                cin >> montoMeta;
+                cuenta.establecerMeta(montoMeta);
+                break;
+            }
+            case 4: {
+                float monto;
+                cout << "Ingrese el monto a agregar a bolsillos: ";
+                cin >> monto;
+                cuenta.agregarABolsillos(monto);
+                break;
+            }
+            case 5: {
+                float monto;
+                cout << "Ingrese el monto a sacar: ";
+                cin >> monto;
+                cuenta.sacarPlata(monto);
+                break;
+            }
+            case 6: {
+                cout << "------Movimientos------" << endl;
+                cuenta.mostrarMovimientos();
+                do {
+                    cout << "1. Ordenar movimientos por número" << endl;
+                    cout << "2. Ordenar movimientos por letra" << endl;
+                    cin >> op3;
+                    if (op3 == 1) {
+                        cuenta.ordenarMovimientosPorNumero();
+                        cout << "Movimientos ordenados por número." << endl;
+                    } else if (op3 == 2) {
+                        cuenta.ordenarMovimientosPorLetra();
+                        cout << "Movimientos ordenados por letra." << endl;
+                    } else {
+                        cout << "Opcion incorrecta" << endl;
+                    }
+                } while (op3 != 1 && op3 != 2);
+                break;
+            }
+            case 7: {
+                cout << "Saliendo del programa." << endl;
+                break;
+            }
+            default:
+                cout << "Opción inválida. Por favor, ingrese una opción válida." << endl;
+        }
+    } while (opcion != 7);
+
+    return 0;
+}
+
